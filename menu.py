@@ -1,21 +1,17 @@
+import generalDefs as methods
 import rich
 import subprocess
 
 
-def clear():
-    print("\033[2J\033[H", end="")
-
-
 def printMenu(n, menu):
-    rich.print("[blue]===============WallWizard================[/blue]")
-    print()
+    methods.printLine()
     if (n == -1):
         return
     for _ in menu:
         if (menu.index(_) == n):
             rich.print(f" ▶ [yellow]{_}[/yellow]")
         else:
-            print(_)
+            print("  ", _)
 
 
 def checkmenuinput(ch, n):
@@ -25,13 +21,13 @@ def checkmenuinput(ch, n):
             if (n != len(menulist) - 1):
                 return n + 1
             print()
-            rich.print("[bold]You can't move any lower[/bold]")
+            rich.print("[red][bold]You can't move any lower[/bold][red]")
             return -1
         else:
             if (n != 0):
                 return n - 1
             print()
-            rich.print("[bold]You can't move any higher[/bold]")
+            rich.print("[red][bold]You can't move any higher[/bold][red]")
             return -1
     else:
         return -1
@@ -57,7 +53,7 @@ while (True):
     menuinput = input("")
     if (menuinput == " "):
         selectedMenu(n)
-    clear()
+    methods.clear()
     inp = checkmenuinput(menuinput, n)
     printMenu(inp, menulist)
     if (inp != -1):
