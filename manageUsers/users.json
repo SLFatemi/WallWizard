@@ -1,6 +1,26 @@
 [
     {
-        "username": "admin",
-        "password": "12345"
+        "username": "sina",
+        "email": "sina@sina.com",
+        "password": "sina11123123",
+        "uuid": "878f10f9-476f-4e42-9369-a67e0ceb2317"
+    },
+    {
+        "username": "sin2",
+        "email": "sidans@fnasjk.com",
+        "password": "slama123123",
+        "uuid": "b487cb34-fcc5-4912-a8be-b0935e70b3e8"
+    },
+    {
+        "username": "sindasd",
+        "email": "dnadnas@jkanjsd.com",
+        "password": "daskldnaksdas",
+        "uuid": "c0c04094-f394-4c62-a8b1-5b0ae55ae452"
+    },
+    {
+        "username": "dajsda",
+        "email": "dsandasjnda@djan.com",
+        "password": "dskandnasdsad",
+        "uuid": "f2d81d4b-0283-480d-88f6-666c5a03ac4d"
     }
 ]
