@@ -1,26 +1,26 @@
 [
     {
         "username": "sina",
-        "email": "sina@sina.com",
-        "password": "sina11123123",
-        "uuid": "878f10f9-476f-4e42-9369-a67e0ceb2317"
+        "email": "sina@gmail.com",
+        "password": "$2b$12$QLJVZ48Qrg2D6sjzeTR77eMV2sPkJgmQ7IigEPVzISOHjMdf9qmTW",
+        "rank": "1000",
+        "isloggedin": false,
+        "uuid": "ce0d4850-51fd-4296-b1d6-8730fb8154b0"
     },
     {
-        "username": "sin2",
-        "email": "sidans@fnasjk.com",
-        "password": "slama123123",
-        "uuid": "b487cb34-fcc5-4912-a8be-b0935e70b3e8"
+        "username": "ddasdsa",
+        "email": "dasd@dsanda.com",
+        "password": "$2b$12$vEhRni8ly2Jn/jaV0kQFgO54pmKDKzGqwom98j9OAjnk6iadA2w6C",
+        "rank": "1000",
+        "isloggedin": false,
+        "uuid": "6c1bc21c-2f23-45e5-a138-0014a2bb294a"
     },
     {
-        "username": "sindasd",
-        "email": "dnadnas@jkanjsd.com",
-        "password": "daskldnaksdas",
-        "uuid": "c0c04094-f394-4c62-a8b1-5b0ae55ae452"
-    },
-    {
-        "username": "dajsda",
-        "email": "dsandasjnda@djan.com",
-        "password": "dskandnasdsad",
-        "uuid": "f2d81d4b-0283-480d-88f6-666c5a03ac4d"
+        "username": "sina2",
+        "email": "sina2@gmail.com",
+        "password": "$2b$12$HRdrWsgsLGsoi0hoLwjCB.pa1hvmDQ6EZ5qtmqiqyQyiZTUrTvw/K",
+        "rank": "1000",
+        "isloggedin": true,
+        "uuid": "e60ee2b6-006f-4a1b-83a1-58c271ea7de2"
     }
 ]

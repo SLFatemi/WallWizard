@@ -1,5 +1,3 @@
-from markdown_it.common.utils import isWhiteSpace
-
 import generalDefs as methods
 import bcrypt
 import time
@@ -11,7 +9,13 @@ import subprocess
 
 methods.clear()
 methods.printLine()
-# s = bcrypt.hashpw(b"12345", bcrypt.gensalt())
+# TODO FIX THIS VVVVVV
+
+# rich.print("[violet][bold]to go back to menu , Enter : [yellow]menu[/yellow]\n")
+# rich.print("[violet][bold]Enter anything else to continue: [yellow]menu[/yellow]\n")
+# s = input()
+# if (s == "menu"):
+#     subprocess.run(["python", "menu.py"], check=True)
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
@@ -63,15 +67,20 @@ def getuserinfo():
         "username": "",
         "email": "",
         "password": "",
+        "rank": "1000",
+        "isloggedin": False,
         "uuid": str(uuid.uuid4())
     }
     while (True):
-        username = input("Enter your username : ")
-        email = input("Enter your email : ")
-        password = input("Enter your password : ")
+        rich.print("[blue][bold]Enter your username :")
+        username = input()
+        rich.print("[blue][bold]Enter your email :")
+        email = input()
+        rich.print("[blue][bold]Enter your password :")
+        password = input()
         if (checkinfovalidation(username, email, password)):
             user["username"] = username
-            user["password"] = password
+            user["password"] = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
             user["email"] = email
             addnewuser(user)
             rich.print("[green][bold]User added successfully [/green][/bold]")
