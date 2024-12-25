@@ -30,7 +30,10 @@ def savejson(users):
 
 def checkinfovalidation(username, email, password):
     if (username.strip() == ""):
-        rich.print("[bold][red]Username cannot be empty [/red][bold]")
+        rich.print("[bold][red]Username cannot be empty[/red][bold]")
+        return False
+    if (" " in username):
+        rich.print("[red][bold]Username shouldn't contain any space [yellow](use underline(_) instead)[/yellow]")
         return False
     if (not checkpasswordlength(password)):
         rich.print("[bold][red]Your passowrd is too short , Try again [/red][bold]")
