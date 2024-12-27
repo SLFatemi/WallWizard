@@ -72,6 +72,7 @@ def getuserinfo():
         "password": "",
         "rank": "1000",
         "isloggedin": False,
+        "isPlayer2": False,
         "uuid": str(uuid.uuid4())
     }
     while (True):

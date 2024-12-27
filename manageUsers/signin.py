@@ -36,7 +36,7 @@ def checkuserValidation(usertocheck, passwordtocheck):
                 user["isloggedin"] = True
                 savejson(users)
                 return True
-            rich.print("[bold][red] Password is incorrect , Try again [/red][/bold]")
+            rich.print("[bold][red]Password is incorrect , Try again [/red][/bold]")
             return False
     rich.print("[bold][red]Username doesn't exists , Try again [/red][/bold]")
     return False
