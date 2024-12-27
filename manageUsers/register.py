@@ -33,10 +33,11 @@ def checkinfovalidation(username, email, password):
         rich.print("[bold][red]Username cannot be empty[/red][bold]")
         return False
     if (" " in username):
-        rich.print("[red][bold]Username shouldn't contain any space [yellow](use underline(_) instead)[/yellow]")
+        rich.print(
+            "[red][bold]Username shouldn't contain any space [bright_yellow](use underline(_) instead)[/bright_yellow]")
         return False
     if (not checkpasswordlength(password)):
-        rich.print("[bold][red]Your passowrd is too short , Try again [/red][bold]")
+        rich.print("[bold][red]Password is too short , Try again [/red][bold]")
         return False
     if (not checkemailpattern(email)):
         rich.print("[bold][red]Enter a valid email , Try again [/red][bold]")
@@ -76,11 +77,11 @@ def getuserinfo():
         "uuid": str(uuid.uuid4())
     }
     while (True):
-        rich.print("[blue][bold]Enter your username :")
+        rich.print("[light_goldenrod3][bold]Enter your username :")
         username = input()
-        rich.print("[blue][bold]Enter your email :")
+        rich.print("[light_goldenrod3][bold]Enter your email :")
         email = input()
-        rich.print("[blue][bold]Enter your password :")
+        rich.print("[light_goldenrod3][bold]Enter your password :")
         password = input()
         if (checkinfovalidation(username, email, password)):
             user["username"] = username

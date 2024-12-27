@@ -36,4 +36,5 @@ def findplayer2():
     return False
 
 
-rich.print(f"[white][bold]Player1 : [violet]{findplayer1()}\t\t[/violet] Player2 : [violet]{findplayer2()}")
+rich.print(f"[bright_white][bold]Player1 : [violet]{findplayer1()}\t\t[/violet] Player2 : [violet]{findplayer2()}")
+rich.print(f"\n   [bright_green][bold]Waiting for Player1 to make a move")
