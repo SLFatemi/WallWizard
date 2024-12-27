@@ -38,7 +38,7 @@ def printMenu(n, menu):
 
 
 def checkmenuinput(ch, n):
-    expectedinputs = ['D', 'd', 'U', 'u']
+    expectedinputs = ['s', 'S', 'W', 'w']
     if (ch in expectedinputs):
         if (expectedinputs.index(ch) < 2):
             if (n != len(menulist) - 1):
@@ -75,7 +75,7 @@ n = 0
 printMenu(n, menulist)
 while (True):
     rich.print(
-        "\n[dark_cyan][bold]Use [magenta2]'U'[/magenta2] to go up , and [magenta2]'D'[/magenta2] to go down and Use [magenta2]'Space'[/magenta2] to select :[/bold]")
+        "\n[dark_cyan][bold]Use [magenta2]'w'[/magenta2] to go up , and [magenta2]'s'[/magenta2] to go down and Use [magenta2]'Space'[/magenta2] to select :[/bold]")
     menuinput = input("")
     if (menuinput == " "):
         selectedMenu(n)
