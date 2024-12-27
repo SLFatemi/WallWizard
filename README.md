@@ -1,6 +1,6 @@
-# Quoridor Game
+# Wall Wizard
 
-Welcome to the Quoridor Game repository! This project implements the Quoridor board game with additional features for registering, logging in, and maintaining a leaderboard.
+Welcome to the WallWizard repository! This project implements the Quoridor board game with additional features for registering, logging in, and maintaining a leaderboard.
 
 ## Introduction
 
@@ -14,7 +14,7 @@ Quoridor is a strategy board game where the objective is to move your pawn to th
 
 ## Usage
 
-1. **To run :**:
+1. **To run**:
 
     ```bash
     python menu.py
