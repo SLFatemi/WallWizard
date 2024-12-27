@@ -25,16 +25,16 @@ def printMenu(n, menu):
         if (user["isloggedin"] == True):
             usrname = user["username"]
             rich.print(
-                f"[purple][bold] You are currently logged in as [italic][blue]{usrname} [/italic][/blue] [/purple][/bold]\n")
+                f"[dark_turquoise][bold] You are currently logged in as [italic][deep_pink4]{usrname} [/italic][/deep_pink4 ] \n")
     if (n > len(menulist) - 1):
         n = 3
     if (n < 0 and n != -1):
         n = 0
     for _ in menu:
         if (menu.index(_) == n):
-            rich.print(f" ▶ [yellow]{_}[/yellow]")
+            rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
         else:
-            print("  ", _)
+            rich.print("  ", f"[bright_white]{_}")
 
 
 def checkmenuinput(ch, n):
@@ -44,16 +44,16 @@ def checkmenuinput(ch, n):
             if (n != len(menulist) - 1):
                 return n + 1
             print()
-            rich.print("[red][bold]You can't move any lower[/bold][red]")
+            rich.print("[bright_red][bold]You can't move any lower[/bold][bright_red]")
             return 10
         else:
             if (n != 0):
                 return n - 1
             print()
-            rich.print("[red][bold]You can't move any higher[/bold][red]")
+            rich.print("[bright_red][bold]You can't move any higher[/bold][bright_red]")
             return -10
     else:
-        rich.print("[red][bold]Invalid input , Try again[/bold][red]")
+        rich.print("[bright_red][bold]Invalid input , Try again[/bold][bright_red]")
         # TODO : MENU CURSOR DOESN'T APPEAR
         return -1
 
@@ -74,7 +74,8 @@ menulist = ["Sign in", "Register", "Start", "Exit"]
 n = 0
 printMenu(n, menulist)
 while (True):
-    rich.print("\n[bold]Use 'U' to go up , and 'D' to go down and Use 'Space' to select :[/bold]")
+    rich.print(
+        "\n[dark_cyan][bold]Use [magenta2]'U'[/magenta2] to go up , and [magenta2]'D'[/magenta2] to go down and Use [magenta2]'Space'[/magenta2] to select :[/bold]")
     menuinput = input("")
     if (menuinput == " "):
         selectedMenu(n)

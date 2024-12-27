@@ -9,7 +9,9 @@ import subprocess
 
 methods.clear()
 methods.printLine()
-
+# TO BE REMOVED VVVVVVVV (FOR TESTING)
+# subprocess.run(["python", "coreGameplay/game.py"], check=True)
+# exit()
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
@@ -24,14 +26,14 @@ def checkuserValidation(usertocheck, passwordtocheck):
             if (bcrypt.checkpw(passwordtocheck.encode('utf-8'), stored_pass)):
                 if (isloggedin() == usertocheck):
                     rich.print(
-                        f"\n[red][bold]You can't play as both players [purple][italic]{username}![/italic][/purple] , you are already logged in as the Player1\n")
+                        f"\n[bright_red][bold]You can't play as both players [purple][italic]{username}![/italic][/purple] , you are already logged in as the Player1\n")
                     return False
                 user["isPlayer2"] = True
                 savejson(users)
                 return True
-            rich.print("[bold][red]Password is incorrect , Try again [/red][/bold]")
+            rich.print("[bold][bright_red]Password is incorrect , Try again [/bright_red][/bold]")
             return False
-    rich.print("[bold][red]Username doesn't exists , Try again [/red][/bold]")
+    rich.print("[bold][bright_red]Username doesn't exists , Try again [/bright_red][/bold]")
     return False
 
 
@@ -55,18 +57,18 @@ def isloggedin():
 
 allNotplayer2(users)
 if (isloggedin() == False):
-    rich.print("[red][bold]You need to log in to be able to start a game! You're being redirected back to menu")
+    rich.print("[bright_red][bold]You need to log in to be able to start a game! You're being redirected back to menu")
     time.sleep(2)
     subprocess.run(["python", "menu.py"], check=True)
 for user in users:
     if (user["isloggedin"] == True):
         usrname = user["username"]
         rich.print(f"[purple][bold]Hello [italic][blue]{usrname}![/italic][/blue] [/purple][/bold]\n")
-        rich.print(f"[yellow][italic]To start a game , log in as the Player2 :\n")
+        rich.print(f"[chartreuse1][italic]To start a game , log in as the Player2 :\n")
 while (True):
-    rich.print("[blue][bold]Enter your username :")
+    rich.print("[light_goldenrod3][bold]Enter your username :")
     username = input()
-    rich.print("[blue][bold]Enter your password :")
+    rich.print("[light_goldenrod3][bold]Enter your password :")
     password = input()
     if (checkuserValidation(username, password)):
         time.sleep(0.5)
@@ -75,7 +77,7 @@ while (True):
         time.sleep(1)
         rich.print(f"\n[purple][bold][blue][italic]{username}[/blue][/italic] is playing as [italic][violet]Player2")
         time.sleep(1)
-        rich.print("\n[green][bold]All set! Match is gonna start soon")
+        rich.print("\n[green][bold]All set! Match is starting soon")
         time.sleep(2)
         rich.print("\n[white][bold]Match is Starting.")
         time.sleep(1)
