@@ -32,7 +32,7 @@
         "password": "$2b$12$mOc12DIidf9aHgABJVBYd.cjIgvYABWfYAIda7O1GcqoMhFmQX/ku",
         "rank": "1000",
         "isloggedin": false,
-        "isPlayer2": false,
+        "isPlayer2": true,
         "uuid": "790f8a3a-7cca-4ef8-80d8-b8762e6734ea"
     },
     {
@@ -41,7 +41,7 @@
         "password": "$2b$12$uTgjjLZLWhy5/UKW4AKhtun2teODUfp.wE3pNxOPOj94GinK1NQDG",
         "rank": "1000",
         "isloggedin": false,
-        "isPlayer2": true,
+        "isPlayer2": false,
         "uuid": "cdb3ea17-19ec-4e09-8d73-b3c7ad90e4a3"
     }
 ]
