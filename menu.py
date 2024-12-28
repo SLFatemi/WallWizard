@@ -3,6 +3,8 @@ import rich
 import subprocess
 import json
 
+# subprocess.run(["python", "coreGameplay/game.py"], check=True)
+# exit()
 # print("━━")
 # print("┃")
 methods.clear()

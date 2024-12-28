@@ -6,4 +6,4 @@ def clear():
 
 
 def printLine():
-    rich.print("[royal_blue1]===============WallWizard===============\n")
+    rich.print("[royal_blue1]====================WallWizard====================\n")
