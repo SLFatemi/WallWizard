@@ -14,8 +14,13 @@ Quoridor is a strategy board game where the objective is to move your pawn to th
 
 ## Usage
 
-1. **To run**:
+1. **Install Dependencies**:
+    Before you start game ensure all requirements are installed
+    ```bash
+    pip install -r requirements.txt
+    ```
 
+2. **To run**:
     ```bash
     python menu.py
     ```

@@ -1,3 +1,7 @@
+import os 
+import sys
+#This is for add module from parent dir
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import generalDefs as methods
 import bcrypt
 import time
@@ -70,3 +74,11 @@ rich.print(f"\n\t[white][bold]Waiting for [bright_red]Player1[/bright_red] to ma
 arrBoard[0][4] = "2"
 arrBoard[7][4] = "1"
 printBoard(arrBoard, arrHFences, arrVFences)
+
+class move_table:
+    def __init__(self):
+        pass
+
+class wall_table:
+    def __init__(self):
+        pass
