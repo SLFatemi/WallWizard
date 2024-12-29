@@ -40,6 +40,10 @@ def checkinfovalidation(username, email, password):
         rich.print(
             "[red][bold]Username shouldn't contain any space [bright_yellow](use underline(_) instead)[/bright_yellow]")
         return False
+    if (" " in password):
+        rich.print(
+            "[red][bold]Password shouldn't contain any space [bright_yellow](use underline(_) instead)[/bright_yellow]")
+        return False
     if (not checkpasswordlength(password)):
         rich.print("[bold][red]Password is too short , Try again [/red][bold]")
         return False
