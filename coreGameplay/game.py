@@ -1,7 +1,3 @@
-from fileinput import close
-
-from PIL.ImageColor import colormap
-
 import generalDefs as methods
 import bcrypt
 import time
