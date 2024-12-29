@@ -1,7 +1,8 @@
+import os 
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from fileinput import close
-
-from PIL.ImageColor import colormap
-
+from PIL.ImageColor import colorma
 import generalDefs as methods
 import bcrypt
 import time
@@ -11,7 +12,6 @@ from rich.console import Console
 import json
 import uuid
 import subprocess
-
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
@@ -155,6 +155,23 @@ def changeplayer2pos(row, colmn, inpt):
 console = Console()
 # ======================= initialize board ===========================
 arrBoard = [["0" for i in range(9)] for j in range(9)]
+arrVFences = [["┃" for i in range(8)] for j in range(9)]
+arrHFences = [["━━" for i in range(9)] for j in range(8)]
+rich.print(
+    f"[bright_white][bold]Player1 : [bright_red]{findplayer1()}\t\t\t    [/bright_red] Player2 : [bright_blue]{findplayer2()}")
+rich.print(f"\n\t[white][bold]Waiting for [bright_red]Player1[/bright_red] to make a move\n")
+# ==========TEST==========
+arrBoard[0][4] = "2"
+arrBoard[7][4] = "1"
+printBoard(arrBoard, arrHFences, arrVFences)
+
+class move_table:
+    def __init__(self):
+        pass
+
+class wall_table:
+    def __init__(self):
+        pass
 arrVFences = [["0" for i in range(8)] for j in range(9)]
 arrHFences = [["0" for i in range(9)] for j in range(8)]
 # ======================= TEST ==========================
