@@ -4,7 +4,7 @@
         "email": "sina@gmail.com",
         "password": "$2b$12$UTOFuUI.J0Xw.bFiIUCy7.RXH80pgXIMKizINqaT9gKqiodoWs7bq",
         "rank": "1000",
-        "isloggedin": false,
+        "isloggedin": true,
         "isPlayer2": false,
         "uuid": "bc3880eb-4092-420f-83a9-ea0fe9926eec"
     },
@@ -18,24 +18,6 @@
         "uuid": "d1e527da-5de4-4c0a-8cbe-3d75f811c59d"
     },
     {
-        "username": "p1",
-        "email": "p1@gmail.com",
-        "password": "$2b$12$ni1nZvXEkyPSutAc1ioMCOf7uAeEluHTHVzt0bfyN2UUnGD4bCOMO",
-        "rank": "1000",
-        "isloggedin": true,
-        "isPlayer2": false,
-        "uuid": "a1d6e633-ebcb-4216-9ab3-1ed97386bb96"
-    },
-    {
-        "username": "p2",
-        "email": "p2@gmail.com",
-        "password": "$2b$12$mOc12DIidf9aHgABJVBYd.cjIgvYABWfYAIda7O1GcqoMhFmQX/ku",
-        "rank": "1000",
-        "isloggedin": false,
-        "isPlayer2": true,
-        "uuid": "790f8a3a-7cca-4ef8-80d8-b8762e6734ea"
-    },
-    {
         "username": "parsa",
         "email": "parsa@gamilc.com",
         "password": "$2b$12$uTgjjLZLWhy5/UKW4AKhtun2teODUfp.wE3pNxOPOj94GinK1NQDG",
@@ -43,5 +25,50 @@
         "isloggedin": false,
         "isPlayer2": false,
         "uuid": "cdb3ea17-19ec-4e09-8d73-b3c7ad90e4a3"
+    },
+    {
+        "username": "sina3",
+        "email": "sina3@gmail.com",
+        "password": "$2b$12$0.HmJnQJ4EmxmzK.u3lyVeobvixiY5r1jB4tJtazM8Ala09NYrMwe",
+        "rank": "1000",
+        "isloggedin": false,
+        "isPlayer2": false,
+        "uuid": "8ea620d1-4b8a-4b4e-ba92-e48ca35f7bc5"
+    },
+    {
+        "username": "sina3123123",
+        "email": "sdadsa@fmalc.com",
+        "password": "$2b$12$KsF4KIQ4ouIn.UT486BcW.p2VmJ8BMq5QlUEgIkTcon9KI/sAnQiG",
+        "rank": "1000",
+        "isloggedin": false,
+        "isPlayer2": false,
+        "uuid": "b4b7db43-b91b-4d86-aa5f-bfbe85fa0a95"
+    },
+    {
+        "username": "p1",
+        "email": "p1@gmail.com",
+        "password": "$2b$12$st6M69qlNEDbUjTm5Edn2exbotTAdJ2RfM16w7kRkoAs11eG3pIaC",
+        "rank": "1000",
+        "isloggedin": false,
+        "isPlayer2": true,
+        "uuid": "0d069fd1-00fc-483d-9118-8bdc214d9b73"
+    },
+    {
+        "username": "p2",
+        "email": "p2@gmail.com",
+        "password": "$2b$12$aEeBfrXZs.PNB2sP8fy1p.gSLse8z1vueTvhgbi5eBthfIzHhlyqa",
+        "rank": "1000",
+        "isloggedin": false,
+        "isPlayer2": false,
+        "uuid": "a0085c9e-6580-4278-8af0-3b2959df2c92"
+    },
+    {
+        "username": "sina323",
+        "email": "dasd@gmail.com",
+        "password": "$2b$12$Z41zpq1/WiUpAJhfFpUvOOCg5LXSrBC0cclp.p.o8LiNXlS5bLy9y",
+        "rank": "1000",
+        "isloggedin": false,
+        "isPlayer2": false,
+        "uuid": "fdb3fdf4-aec0-4bcc-9ab4-8cc3e6aebef1"
     }
 ]
