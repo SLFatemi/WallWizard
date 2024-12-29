@@ -29,6 +29,8 @@ def isloggedin():
 
 
 def checkuserValidation(usertocheck, passwordtocheck):
+    usertocheck = usertocheck.strip()
+    passwordtocheck = passwordtocheck.strip()
     for user in users:
         stored_pass = user["password"].encode('utf-8')
         if (user["username"] == usertocheck):
