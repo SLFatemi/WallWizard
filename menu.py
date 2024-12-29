@@ -8,7 +8,6 @@ import json
 # print("━━")
 # print("┃")
 methods.clear()
-lastplacecursor = 0
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
@@ -35,8 +34,6 @@ def printMenu(n, menu):
         n = 0
     for _ in menu:
         if (menu.index(_) == n):
-            global lastplacecursor
-            lastplacecursor = n
             rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
         else:
             rich.print("  ", f"[bright_white]{_}")
@@ -44,23 +41,23 @@ def printMenu(n, menu):
 
 def checkmenuinput(ch, n):
     expectedinputs = ['s', 'S', 'W', 'w']
-    ch = ch.strip()
     if (ch in expectedinputs):
         if (expectedinputs.index(ch) < 2):
             if (n != len(menulist) - 1):
                 return n + 1
             print()
-            rich.print("[bright_red][bold]You can't move any lower[/bold][/bright_red]")
+            rich.print("[bright_red][bold]You can't move any lower[/bold][bright_red]")
             return 10
         else:
             if (n != 0):
                 return n - 1
             print()
-            rich.print("[bright_red][bold]You can't move any higher[/bold][/bright_red]")
+            rich.print("[bright_red][bold]You can't move any higher[/bold][bright_red]")
             return -10
     else:
         rich.print("[bright_red][bold]Invalid input , Try again[/bold][bright_red]")
-        return lastplacecursor
+        # TODO : MENU CURSOR DOESN'T APPEAR
+        return -1
 
 
 def selectedMenu(n):
