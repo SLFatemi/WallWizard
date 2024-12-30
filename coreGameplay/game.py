@@ -10,8 +10,6 @@ with open("manageUsers/users.json", 'r') as file:
         users = []
 
 
-#
-
 def savejson(users):
     with open("manageUsers/users.json", 'w') as userjson:
         json.dump(users, userjson, indent=4)
@@ -119,11 +117,13 @@ def changeplayer1pos(row, colmn, inpt):
     arrBoard[row][colmn] = "0"
     if (inpt == 'w'):
         if (arrBoard[row - 1][colmn] != '0'):
-            try:
+            # ========== NEGATIVE INDEXING (can't use try:except) ============
+            if (row - 2 >= 0):
                 arrBoard[row - 2][colmn] = "1"
                 return (row - 2, colmn)
-            except:
+            else:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "1"
                 return False
         arrBoard[row - 1][colmn] = "1"
         return (row - 1, colmn)
@@ -134,6 +134,7 @@ def changeplayer1pos(row, colmn, inpt):
                 return (row + 2, colmn)
             except:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "1"
                 return False
         arrBoard[row + 1][colmn] = "1"
         return (row + 1, colmn)
@@ -144,16 +145,19 @@ def changeplayer1pos(row, colmn, inpt):
                 return (row, colmn + 2)
             except:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "1"
                 return False
         arrBoard[row][colmn + 1] = "1"
         return (row, colmn + 1)
     if (inpt == 'a'):
         if (arrBoard[row][colmn - 1] != '0'):
-            try:
+            # ========== NEGATIVE INDEXING (can't use try:except) ============
+            if (colmn - 2 >= 0):
                 arrBoard[row][colmn - 2] = "1"
                 return (row, colmn - 2)
-            except:
+            else:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "1"
                 return False
         arrBoard[row][colmn - 1] = "1"
         return (row, colmn - 1)
@@ -167,11 +171,13 @@ def changeplayer2pos(row, colmn, inpt):
     arrBoard[row][colmn] = "0"
     if (inpt == 'w'):
         if (arrBoard[row - 1][colmn] != '0'):
-            try:
+            # ========== NEGATIVE INDEXING (can't use try:except) ============
+            if (row - 2 >= 0):
                 arrBoard[row - 2][colmn] = "2"
                 return (row - 2, colmn)
-            except:
+            else:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "2"
                 return False
         arrBoard[row - 1][colmn] = "2"
         return (row - 1, colmn)
@@ -182,6 +188,7 @@ def changeplayer2pos(row, colmn, inpt):
                 return (row + 2, colmn)
             except:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "2"
                 return False
         arrBoard[row + 1][colmn] = "2"
         return (row + 1, colmn)
@@ -192,16 +199,19 @@ def changeplayer2pos(row, colmn, inpt):
                 return (row, colmn + 2)
             except:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "2"
                 return False
         arrBoard[row][colmn + 1] = "2"
         return (row, colmn + 1)
     if (inpt == 'a'):
         if (arrBoard[row][colmn - 1] != '0'):
-            try:
+            # ========== NEGATIVE INDEXING (can't use try:except) ============
+            if (colmn - 2 >= 0):
                 arrBoard[row][colmn - 2] = "2"
                 return (row, colmn - 2)
-            except:
+            else:
                 rich.print("[bold][bright_red]\t    You can't make that move")
+                arrBoard[row][colmn] = "2"
                 return False
         arrBoard[row][colmn - 1] = "2"
         return (row, colmn - 1)
@@ -214,12 +224,12 @@ arrBoard = [["0" for i in range(9)] for j in range(9)]
 arrVFences = [["0" for i in range(8)] for j in range(9)]
 arrHFences = [["0" for i in range(9)] for j in range(8)]
 # ======================= TEST ==========================
-arrHFences[7][4] = "1"
+# arrHFences[7][4] = "1"
 arrVFences[6][4] = "1"
 arrHFences[5][4] = "1"
 arrVFences[4][4] = "1"
 # ======================= TEST ==========================
-rowp1 = 8
+rowp1 = 1
 rowp2 = 0
 colmnp1 = 4
 colmnp2 = 4
