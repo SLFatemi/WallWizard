@@ -1,14 +1,13 @@
-import os 
+import os
 import sys
-#This is for add module from parent dir
+
+# This is for add module from parent dir
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import generalDefs as methods
 import bcrypt
 import time
-import re
 import rich
 import json
-import uuid
 import subprocess
 
 methods.clear()
