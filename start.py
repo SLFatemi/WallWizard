@@ -1,10 +1,8 @@
 import generalDefs as methods
 import bcrypt
 import time
-import re
 import rich
 import json
-import uuid
 import subprocess
 
 methods.clear()
@@ -20,8 +18,6 @@ with open("manageUsers/users.json", 'r') as file:
 
 
 def checkuserValidation(usertocheck, passwordtocheck):
-    usertocheck = usertocheck.strip()
-    passwordtocheck = passwordtocheck.strip()
     for user in users:
         stored_pass = user["password"].encode('utf-8')
         if (user["username"] == usertocheck):
@@ -75,9 +71,10 @@ while (True):
     if (checkuserValidation(username, password)):
         time.sleep(0.5)
         rich.print(
-            f"\n[purple][bold][blue][italic]{isloggedin()}[/blue][/italic] is playing as [italic][violet]Player1[/italic][/violet]")
+            f"\n[purple][bold][blue][italic]{isloggedin()}[/blue][/italic] is playing as [italic][bright_red]Player1")
         time.sleep(1)
-        rich.print(f"\n[purple][bold][blue][italic]{username}[/blue][/italic] is playing as [italic][violet]Player2")
+        rich.print(
+            f"\n[purple][bold][blue][italic]{username}[/blue][/italic] is playing as [bright_blue][italic]Player2")
         time.sleep(1)
         rich.print("\n[green][bold]All set! Match is starting soon")
         time.sleep(2)
