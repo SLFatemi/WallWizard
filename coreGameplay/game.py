@@ -1,3 +1,5 @@
+#This is for add module from parent dir
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import generalDefs as methods
 import rich
 from rich.console import Console
