@@ -3,8 +3,8 @@ import rich
 import subprocess
 import json
 
-subprocess.run(["python", "coreGameplay/game.py"], check=True)
-exit()
+# subprocess.run(["python", "coreGameplay/game.py"], check=True)
+# exit()
 methods.clear()
 with open("manageUsers/users.json", 'r') as file:
     try:
