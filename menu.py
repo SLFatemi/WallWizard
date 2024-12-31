@@ -1,11 +1,14 @@
+from logging import lastResort
+
 import generalDefs as methods
 import rich
 import subprocess
 import json
 
-subprocess.run(["python", "coreGameplay/game.py"], check=True)
-exit()
+# subprocess.run(["python", "coreGameplay/game.py"], check=True)
+# exit()
 methods.clear()
+lastplacecursor = 0
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
@@ -32,6 +35,8 @@ def printMenu(n, menu):
         n = 0
     for _ in menu:
         if (menu.index(_) == n):
+            global lastplacecursor
+            lastplacecursor = n
             rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
         else:
             rich.print("  ", f"[bright_white]{_}")
@@ -39,6 +44,7 @@ def printMenu(n, menu):
 
 def checkmenuinput(ch, n):
     expectedinputs = ['s', 'S', 'W', 'w']
+    ch = ch.strip()
     if (ch in expectedinputs):
         if (expectedinputs.index(ch) < 2):
             if (n != len(menulist) - 1):
@@ -54,8 +60,7 @@ def checkmenuinput(ch, n):
             return -10
     else:
         rich.print("[bright_red][bold]Invalid input , Try again[/bold][bright_red]")
-        # TODO : MENU CURSOR DOESN'T APPEAR
-        return -1
+        return lastplacecursor
 
 
 def selectedMenu(n):
