@@ -3,6 +3,7 @@ from dfs import dfs_recursive
 import generalDefs as methods
 import rich
 from rich.console import Console
+from dfs import dfs_recursive
 import json
 
 with open("manageUsers/users.json", 'r') as file:
@@ -428,3 +429,24 @@ while (True):
     else:
         turn = "p1"
     printBoard(arrBoard, arrHFences, arrVFences, turn)
+
+def wall_valid(row1,col1,row2,col2,wall_h,wall_v,wall_row,wall_col,mode):
+    if(mode == 'h'):
+        wall_h[wall_row][wall_col],wall_h[wall_row][wall_col+1] = "1","1"
+    else:
+        wall_v[wall_row][wall_col],wall_v[wall_row+1][wall_col] = "1","1"
+    visited = [[False for i in range(9)] for j in range(9)]
+    dfs_recursive(arrBoard,row1,col1,visited,wall_h,wall_v)
+    result1 = False
+    for i in range(0,9):
+        if(viseited[8][i]):
+            result1 = True
+            break
+    visited = [[False for i in range(9)] for j in range(9)]
+    dfs_recursive(arrBoard,row2,col2,visited,wall_h,wall_v)
+    result2 = False
+    for i in range(0,9):
+        if(viseited[0][i]):
+            result2 = True
+            break
+    return result1 and result2
