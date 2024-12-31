@@ -54,7 +54,7 @@ def findplayer2():
     return False
 
 
-# =============== TOO SLOW ==============
+# =============== TOO SLOW ===============
 
 
 # def printBoard(arrBoard, arrHFences, arrVFences, turn):
