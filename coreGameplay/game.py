@@ -1,5 +1,5 @@
 import copy
-
+from dfs import dfs_recursive
 import generalDefs as methods
 import rich
 from rich.console import Console
@@ -10,6 +10,28 @@ with open("manageUsers/users.json", 'r') as file:
         users = json.load(file)
     except json.JSONDecodeError:
         users = []
+
+
+def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode):
+    if (mode == 'h'):
+        wall_h[wall_row][wall_col], wall_h[wall_row][wall_col + 1] = "1", "1"
+    else:
+        wall_v[wall_row][wall_col], wall_v[wall_row + 1][wall_col] = "1", "1"
+    visited = [[False for i in range(9)] for j in range(9)]
+    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v)
+    result1 = False
+    for i in range(0, 9):
+        if (visited[8][i]):
+            result1 = True
+            break
+    visited = [[False for i in range(9)] for j in range(9)]
+    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v)
+    result2 = False
+    for i in range(0, 9):
+        if (visited[0][i]):
+            result2 = True
+            break
+    return result1 and result2
 
 
 def savejson(users):
@@ -126,16 +148,28 @@ def placewall(turn, wallrow=7, wallcolmn=0):
             arrVFences[wallrow][wallcolmn] = '2'
             arrVFences[wallrow + 1][wallcolmn] = '2'
             if (s == 'w'):
+                if (wallrow <= 0):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow + 1][wallcolmn]
                 wallrow -= 1
             if (s == 's'):
+                if (wallrow >= 7):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 wallrow += 1
             if (s == 'd'):
+                if (wallcolmn >= 7):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 wallcolmn += 1
             if (s == 'a'):
+                if (wallcolmn <= 0):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 wallcolmn -= 1
@@ -144,6 +178,12 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow + 1][wallcolmn]
             if (s == " "):
+                # ======================= CHECK WITH DFS ===================
+                if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'v')):
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
+                # TODO
+                # ======================= CHECK OTHER WALLS ===================
                 arrVFences[wallrow][wallcolmn] = '1'
                 arrVFences[wallrow + 1][wallcolmn] = '1'
                 break
@@ -151,17 +191,29 @@ def placewall(turn, wallrow=7, wallcolmn=0):
             arrHFences[wallrow][wallcolmn] = '2'
             arrHFences[wallrow][wallcolmn + 1] = '2'
             if (s == 'w'):
+                if (wallrow <= 0):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrHFences[wallrow][wallcolmn] = realarrHFences[wallrow][wallcolmn]
                 arrHFences[wallrow][wallcolmn + 1] = realarrHFences[wallrow][wallcolmn + 1]
                 wallrow -= 1
             if (s == 's'):
+                if (wallrow >= 7):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrHFences[wallrow][wallcolmn] = realarrHFences[wallrow][wallcolmn]
                 arrHFences[wallrow][wallcolmn + 1] = realarrHFences[wallrow][wallcolmn + 1]
                 wallrow += 1
             if (s == 'd'):
+                if (wallcolmn >= 7):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrHFences[wallrow][wallcolmn] = realarrHFences[wallrow][wallcolmn]
                 wallcolmn += 1
             if (s == 'a'):
+                if (wallcolmn <= 0):
+                    rich.print("[bold][bright_red]\t    You can't make that move")
+                    continue
                 arrHFences[wallrow][wallcolmn + 1] = realarrHFences[wallrow][wallcolmn + 1]
                 wallcolmn -= 1
             if (s == 'r'):
@@ -169,6 +221,13 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                 arrHFences[wallrow][wallcolmn] = realarrHFences[wallrow][wallcolmn]
                 arrHFences[wallrow][wallcolmn + 1] = realarrHFences[wallrow][wallcolmn + 1]
             if (s == " "):
+                # ======================= CHECK WITH DFS ===================
+                if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'h')):
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
+                # TODO
+                # ======================= CHECK OTHER WALLS ===================
+
                 arrHFences[wallrow][wallcolmn] = '1'
                 arrHFences[wallrow][wallcolmn + 1] = '1'
                 break
