@@ -231,10 +231,11 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow + 1][wallcolmn]
             if (s == " "):
+
                 # ======================= CHECK WITH DFS ===================
-                # if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'v')):
-                #     rich.print("[bold][bright_red]\t    You can't place that wall")
-                #     continue
+                if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'v')):
+                     rich.print("[bold][bright_red]\t    You can't place that wall")
+                     continue
                 # TODO
                 # ======================= CHECK OTHER WALLS ===================
                 arrVFences[wallrow][wallcolmn] = '1'
@@ -275,9 +276,9 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                 arrHFences[wallrow][wallcolmn + 1] = realarrHFences[wallrow][wallcolmn + 1]
             if (s == " "):
                 # ======================= CHECK WITH DFS ===================
-                # if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'h')):
-                #     rich.print("[bold][bright_red]\t    You can't place that wall")
-                #     continue
+                if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'h')):
+                     rich.print("[bold][bright_red]\t    You can't place that wall")
+                     continue
                 # TODO
                 # ======================= CHECK OTHER WALLS ===================
 
@@ -466,7 +467,7 @@ while (True):
             colmnp2 = output[1]
         elif (ipt == 'w'):
             methods.clear()
-            placewall("p2", 7, 0)
+            placewall("p2", 4, 5)
         elif (ipt == 'leave'):
             rich.print("[bold][deep_pink4]Player2 has surrendered")
             # TODO
