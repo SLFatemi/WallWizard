@@ -3,6 +3,7 @@ import sys
 
 # This is for add module from parent dir
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from generalDefs import loading
 import generalDefs as methods
 import bcrypt
 import time
@@ -72,8 +73,9 @@ while (True):
     rich.print("[light_goldenrod3][bold]Enter your password :")
     password = input()
     if (checkuserValidation(username, password)):
-        rich.print(f"[green][bold]\nWelcome , [deep_pink4]{username}![/deep_pink4][/green][/bold]")
+        rich.print(f"[green][bold]\nWelcome , [deep_pink4]{username}![/deep_pink4][/green][/bold]\n")
         break
 
-time.sleep(2)
+# time.sleep(2)
+loading()
 subprocess.run(["python", "menu.py"], check=True)

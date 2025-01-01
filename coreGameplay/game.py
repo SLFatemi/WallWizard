@@ -1,8 +1,11 @@
 import os
 import sys
 import copy
+import time
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from generalDefs import loading
+import subprocess
 import generalDefs as methods
 import rich
 from rich.console import Console
@@ -111,7 +114,7 @@ def printBoard(arrBoard, arrHFences, arrVFences, turn):
     board_str.append(
         "[bright_white][bold]  Enter [bright_green]'w'[/bright_green] to place a wall or Enter [bright_green]'m'[/bright_green] to move \n\t   [deep_pink4]Enter 'leave' to surrender[/deep_pink4]")
     board_str.append(
-        "[white]     Use 'w,a,s,d' to move across the board \n\t   'r' to rotate the wall")
+        "[white]     Use [bright_green]'w,a,s,d'[/bright_green] to move across the board \n\t    Use [bright_green]'r'[/bright_green] to rotate the wall\n")
     if (turn == "p1"):
         board_str.append(
             f"\t[white][bold]Waiting for [italic][bright_red]Player1[/bright_red][/italic] to make a move\n")
@@ -123,13 +126,17 @@ def printBoard(arrBoard, arrHFences, arrVFences, turn):
             row_str = "\t"
             for j in range(9):
                 if (arrBoard[i // 2][j] != "0"):
-                    cell = "[bright_red]1" if arrBoard[i // 2][j] == "1" else "[bright_blue]2"
-                    row_str += cell + " "
+                    # cell = "[bright_red]1 " if arrBoard[i // 2][j] == "1" else "[bright_blue]2 "
+                    # ====================== COMMENT THIS IF THERE ARE RENDERING ISSUES ===============================
+                    cell = "[bright_red]⬛" if arrBoard[i // 2][j] == "1" else "[bright_blue]⬛"
+                    row_str += cell
                 else:
-                    row_str += "[white]0 "
+                    # row_str += "[white]0 "
+                    # ====================== COMMENT THIS IF THERE ARE RENDERING ISSUES ===============================
+                    row_str += "[grey84]⬛"
                 if (j < 8):
                     if (arrVFences[i // 2][j] == '1'):
-                        cell = "[bright_white]┃"
+                        cell = "[dark_orange3]┃"
                     elif (arrVFences[i // 2][j] == '2'):
                         cell = "[cyan]┃"
                     else:
@@ -140,7 +147,7 @@ def printBoard(arrBoard, arrHFences, arrVFences, turn):
             row_str = "\t"
             for j in range(9):
                 if (arrHFences[i // 2][j] == '1'):
-                    cell = "[bright_white]━━"
+                    cell = "[dark_orange3]━━"
                 elif (arrHFences[i // 2][j] == '2'):
                     cell = "[cyan]━━"
                 else:
@@ -283,7 +290,6 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                 if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'h')):
                     rich.print("[bold][bright_red]\t    You can't place that wall")
                     continue
-                # TODO
                 # ======================= CHECK OTHER WALLS ===================
                 if (realarrVFences[wallrow][wallcolmn] == '1' and realarrVFences[wallrow + 1][wallcolmn] == '1'):
                     rich.print("[bold][bright_red]\t    You can't place that wall")
@@ -456,8 +462,15 @@ while (True):
             methods.clear()
             placewall("p1", 4, 4)
         elif (ipt == 'leave'):
-            rich.print("[bold][deep_pink4]Player1 has surrendered")
+            rich.print("[white][bright_red]\t     Player1[/bright_red] has surrendered\n")
+            rich.print(
+                "[bold][bright_white][bright_blue]\t   Player2[/bright_blue] is the [gold1]W I N N E R ![/gold1]\n")
+            rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+            time.sleep(1)
+            print("\t\t", end="")
+            loading()
             # TODO
+            subprocess.run(["python", "menu.py"], check=True)
             exit()
         else:
             methods.clear()
@@ -478,8 +491,15 @@ while (True):
             methods.clear()
             placewall("p2", 4, 4)
         elif (ipt == 'leave'):
-            rich.print("[bold][deep_pink4]Player2 has surrendered")
+            rich.print("[white][bright_blue]\t     Player2[/bright_blue] has surrendered\n")
+            rich.print(
+                "[bold][bright_white][bright_red]\t   Player1[/bright_red] is the [gold1]W I N N E R ![/gold1]\n")
+            rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+            time.sleep(1)
+            print("\t\t", end="")
+            loading()
             # TODO
+            subprocess.run(["python", "menu.py"], check=True)
             exit()
         else:
             methods.clear()
