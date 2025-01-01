@@ -1,7 +1,6 @@
 import os
 import sys
 import copy
-from dfs import dfs_recursive
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import generalDefs as methods
@@ -217,27 +216,32 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                     rich.print("[bold][bright_red]\t    You can't make that move")
                     continue
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
-                arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow][wallcolmn]
+                arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow + 1][wallcolmn]
                 wallcolmn += 1
             if (s == 'a'):
                 if (wallcolmn <= 0):
                     rich.print("[bold][bright_red]\t    You can't make that move")
                     continue
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
-                arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow][wallcolmn]
+                arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow + 1][wallcolmn]
                 wallcolmn -= 1
             if (s == 'r'):
                 vertical = False
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
                 arrVFences[wallrow + 1][wallcolmn] = realarrVFences[wallrow + 1][wallcolmn]
             if (s == " "):
-
                 # ======================= CHECK WITH DFS ===================
                 if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'v')):
-                     rich.print("[bold][bright_red]\t    You can't place that wall")
-                     continue
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
                 # TODO
                 # ======================= CHECK OTHER WALLS ===================
+                if (realarrHFences[wallrow][wallcolmn] == '1' and realarrHFences[wallrow][wallcolmn + 1] == '1'):
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
+                if (realarrVFences[wallrow][wallcolmn] == '1' or realarrVFences[wallrow + 1][wallcolmn] == '1'):
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
                 arrVFences[wallrow][wallcolmn] = '1'
                 arrVFences[wallrow + 1][wallcolmn] = '1'
                 break
@@ -277,11 +281,16 @@ def placewall(turn, wallrow=7, wallcolmn=0):
             if (s == " "):
                 # ======================= CHECK WITH DFS ===================
                 if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'h')):
-                     rich.print("[bold][bright_red]\t    You can't place that wall")
-                     continue
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
                 # TODO
                 # ======================= CHECK OTHER WALLS ===================
-
+                if (realarrVFences[wallrow][wallcolmn] == '1' and realarrVFences[wallrow + 1][wallcolmn] == '1'):
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
+                if (realarrHFences[wallrow][wallcolmn] == '1' or realarrHFences[wallrow][wallcolmn + 1] == '1'):
+                    rich.print("[bold][bright_red]\t    You can't place that wall")
+                    continue
                 arrHFences[wallrow][wallcolmn] = '1'
                 arrHFences[wallrow][wallcolmn + 1] = '1'
                 break
@@ -445,7 +454,7 @@ while (True):
             colmnp1 = output[1]
         elif (ipt == 'w'):
             methods.clear()
-            placewall("p1", 7, 0)
+            placewall("p1", 4, 4)
         elif (ipt == 'leave'):
             rich.print("[bold][deep_pink4]Player1 has surrendered")
             # TODO
@@ -467,7 +476,7 @@ while (True):
             colmnp2 = output[1]
         elif (ipt == 'w'):
             methods.clear()
-            placewall("p2", 4, 5)
+            placewall("p2", 4, 4)
         elif (ipt == 'leave'):
             rich.print("[bold][deep_pink4]Player2 has surrendered")
             # TODO
@@ -493,14 +502,14 @@ def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode)
     dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v)
     result1 = False
     for i in range(0, 9):
-        if (viseited[8][i]):
+        if (visited[8][i]):
             result1 = True
             break
     visited = [[False for i in range(9)] for j in range(9)]
     dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v)
     result2 = False
     for i in range(0, 9):
-        if (viseited[0][i]):
+        if (visited[0][i]):
             result2 = True
             break
     return result1 and result2
