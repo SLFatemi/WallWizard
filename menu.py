@@ -3,14 +3,20 @@ import rich
 import subprocess
 import json
 
-# print("━━")
-# print("┃")
+# subprocess.run(["python", "coreGameplay/game.py"], check=True)
+# exit()
 methods.clear()
+lastplacecursor = 0
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
     except json.JSONDecodeError:
         users = []
+
+
+def savejson(users):
+    with open("manageUsers/users.json", 'w') as userjson:
+        json.dump(users, userjson, indent=4)
 
 
 def printMenu(n, menu):
@@ -20,37 +26,39 @@ def printMenu(n, menu):
         if (user["isloggedin"] == True):
             usrname = user["username"]
             rich.print(
-                f"[purple][bold] You are currently logged in as [italic][blue]{usrname} [/italic][/blue] [/purple][/bold]\n")
+                f"[dark_turquoise][bold]You're currently logged in as [italic][deep_pink4]{usrname} [/italic][/deep_pink4 ] \n")
     if (n > len(menulist) - 1):
         n = 3
     if (n < 0 and n != -1):
         n = 0
     for _ in menu:
         if (menu.index(_) == n):
-            rich.print(f" ▶ [yellow]{_}[/yellow]")
+            global lastplacecursor
+            lastplacecursor = n
+            rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
         else:
-            print("  ", _)
+            rich.print("  ", f"[bright_white]{_}")
 
 
 def checkmenuinput(ch, n):
-    expectedinputs = ['D', 'd', 'U', 'u']
+    expectedinputs = ['s', 'S', 'W', 'w']
+    ch = ch.strip()
     if (ch in expectedinputs):
         if (expectedinputs.index(ch) < 2):
             if (n != len(menulist) - 1):
                 return n + 1
             print()
-            rich.print("[red][bold]You can't move any lower[/bold][red]")
+            rich.print("[bright_red][bold]You can't move any lower[/bold][bright_red]")
             return 10
         else:
             if (n != 0):
                 return n - 1
             print()
-            rich.print("[red][bold]You can't move any higher[/bold][red]")
+            rich.print("[bright_red][bold]You can't move any higher[/bold][bright_red]")
             return -10
     else:
-        rich.print("[red][bold]Invalid input , Try again[/bold][red]")
-        # TODO : MENU CURSOR DOESN'T APPEAR
-        return -1
+        rich.print("[bright_red][bold]Invalid input , Try again[/bold][bright_red]")
+        return lastplacecursor
 
 
 def selectedMenu(n):
@@ -69,7 +77,8 @@ menulist = ["Sign in", "Register", "Start", "Exit"]
 n = 0
 printMenu(n, menulist)
 while (True):
-    rich.print("\n[bold]Use 'U' to go up , and 'D' to go down and Use 'Space' to select :[/bold]")
+    rich.print(
+        "\n[dark_cyan][bold]Use [magenta2]'w'[/magenta2] to go up, [magenta2]'s'[/magenta2] to go down and [magenta2]'Space'[/magenta2] to select[/bold]")
     menuinput = input("")
     if (menuinput == " "):
         selectedMenu(n)

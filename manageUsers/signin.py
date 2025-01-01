@@ -1,10 +1,14 @@
+import os
+import sys
+
+# This is for add module from parent dir
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from generalDefs import loading
 import generalDefs as methods
 import bcrypt
 import time
-import re
 import rich
 import json
-import uuid
 import subprocess
 
 methods.clear()
@@ -36,7 +40,7 @@ def checkuserValidation(usertocheck, passwordtocheck):
                 user["isloggedin"] = True
                 savejson(users)
                 return True
-            rich.print("[bold][red] Password is incorrect , Try again [/red][/bold]")
+            rich.print("[bold][red]Password is incorrect , Try again [/red][/bold]")
             return False
     rich.print("[bold][red]Username doesn't exists , Try again [/red][/bold]")
     return False
@@ -44,14 +48,14 @@ def checkuserValidation(usertocheck, passwordtocheck):
 
 if (isloggedin() != False):
     rich.print(
-        f"[purple][bold]You are already logged in as [italic][blue]{isloggedin()} [/italic][/blue] [/purple][/bold]\n")
-    rich.print("[violet][bold]to logout , Enter : [yellow]logout[/yellow]")
-    rich.print("[violet][bold]to go back to menu , Enter : [yellow]menu[/yellow]\n")
+        f"[khaki3][bold]You are already logged in as [italic][deep_pink4]{isloggedin()} [/italic][/deep_pink4] [/khaki3][/bold]\n")
+    rich.print("[bright_white][bold]to logout , Enter : [medium_orchid1]logout[/medium_orchid1]")
+    rich.print("[bright_white][bold]to go back to menu , Enter : [medium_orchid1]menu[/medium_orchid1]\n")
     while (True):
         s = input()
         if (s == 'logout'):
             rich.print(
-                f"[purple][bold]You have successfully logged out , you can Sign in now[/purple][/bold]\n")
+                f"[orchid][bold]You have successfully logged out , you can Sign in now\n")
             for user in users:
                 if (user["username"] == isloggedin()):
                     user["isloggedin"] = False
@@ -60,16 +64,18 @@ if (isloggedin() != False):
         elif (s == "menu"):
             subprocess.run(["python", "menu.py"], check=True)
         else:
-            rich.print("[bold][red]To get back to menu, Enter : [yellow]menu[/yellow] , or Try again[/red][/bold]")
+            rich.print(
+                "[bold][bright_white]To get back to menu, Enter : [yellow]menu[/yellow] , or Try again[/bright_white][/bold]")
 
 while (True):
-    rich.print("[blue][bold]Enter your username :")
+    rich.print("[light_goldenrod3][bold]Enter your username :")
     username = input()
-    rich.print("[blue][bold]Enter your password :")
+    rich.print("[light_goldenrod3][bold]Enter your password :")
     password = input()
     if (checkuserValidation(username, password)):
-        rich.print(f"[green][bold]\nWelcome , [blue]{username}![/blue][/green][/bold]")
+        rich.print(f"[green][bold]\nWelcome , [deep_pink4]{username}![/deep_pink4][/green][/bold]\n")
         break
 
-time.sleep(2)
+# time.sleep(2)
+loading()
 subprocess.run(["python", "menu.py"], check=True)
