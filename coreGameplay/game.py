@@ -20,29 +20,6 @@ with open("manageUsers/users.json", 'r') as file:
     except json.JSONDecodeError:
         users = []
 
-
-def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode):
-    if (mode == 'h'):
-        wall_h[wall_row][wall_col], wall_h[wall_row][wall_col + 1] = "1", "1"
-    else:
-        wall_v[wall_row][wall_col], wall_v[wall_row + 1][wall_col] = "1", "1"
-    visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v)
-    result1 = False
-    for i in range(0, 9):
-        if (visited[8][i]):
-            result1 = True
-            break
-    visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v)
-    result2 = False
-    for i in range(0, 9):
-        if (visited[0][i]):
-            result2 = True
-            break
-    return result1 and result2
-
-
 def savejson(users):
     with open("manageUsers/users.json", 'w') as userjson:
         json.dump(users, userjson, indent=4)
@@ -60,6 +37,27 @@ def findplayer2():
         if (user["isPlayer2"] == True):
             return user["username"]
     return False
+
+def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode):
+    if (mode == 'h'):
+        wall_h[wall_row][wall_col], wall_h[wall_row][wall_col + 1] = "1", "1"
+    else:
+        wall_v[wall_row][wall_col], wall_v[wall_row + 1][wall_col] = "1", "1"
+    visited = [[False for i in range(9)] for j in range(9)]
+    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v,"2")
+    result1 = False
+    for i in range(0, 9):
+        if (visited[0][i]):
+            result1 = True
+            break
+    visited = [[False for i in range(9)] for j in range(9)]
+    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v,"1")
+    result2 = False
+    for i in range(0, 9):
+        if (visited[8][i]):
+            result2 = True
+            break
+    return result1 and result2
 
 
 # =============== TOO SLOW ===============
@@ -486,25 +484,3 @@ while (True):
     else:
         turn = "p1"
     printBoard(arrBoard, arrHFences, arrVFences, turn)
-
-
-def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode):
-    if (mode == 'h'):
-        wall_h[wall_row][wall_col], wall_h[wall_row][wall_col + 1] = "1", "1"
-    else:
-        wall_v[wall_row][wall_col], wall_v[wall_row + 1][wall_col] = "1", "1"
-    visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v)
-    result1 = False
-    for i in range(0, 9):
-        if (viseited[8][i]):
-            result1 = True
-            break
-    visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v)
-    result2 = False
-    for i in range(0, 9):
-        if (viseited[0][i]):
-            result2 = True
-            break
-    return result1 and result2
