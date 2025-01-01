@@ -5,6 +5,8 @@ import rich
 import json
 import subprocess
 
+from generalDefs import loading
+
 methods.clear()
 methods.printLine()
 # TO BE REMOVED VVVVVVVV (FOR TESTING)
@@ -56,8 +58,9 @@ def isloggedin():
 allNotplayer2(users)
 if (isloggedin() == False):
     rich.print("[bright_red][bold]You need to log in to be able to start a game! You're being redirected back to menu")
-    time.sleep(2)
+    time.sleep(1.5)
     subprocess.run(["python", "menu.py"], check=True)
+    exit()
 for user in users:
     if (user["isloggedin"] == True):
         usrname = user["username"]
@@ -69,20 +72,14 @@ while (True):
     rich.print("[light_goldenrod3][bold]Enter your password :")
     password = input()
     if (checkuserValidation(username, password)):
-        time.sleep(0.5)
+        time.sleep(0.2)
         rich.print(
             f"\n[purple][bold][blue][italic]{isloggedin()}[/blue][/italic] is playing as [italic][bright_red]Player1")
-        time.sleep(1)
         rich.print(
             f"\n[purple][bold][blue][italic]{username}[/blue][/italic] is playing as [bright_blue][italic]Player2")
-        time.sleep(1)
-        rich.print("\n[green][bold]All set! Match is starting soon")
-        time.sleep(2)
-        rich.print("\n[white][bold]Match is Starting.")
-        time.sleep(1)
-        rich.print("[white][bold]Match is Starting..")
-        time.sleep(1)
-        rich.print("[white][bold]Match is Starting...")
-        time.sleep(1)
+        time.sleep(0.5)
+        rich.print("\n[bright_white][bold]All set! Match is starting soon\n")
+        time.sleep(0.5)
+        loading()
         subprocess.run(["python", "coreGameplay/game.py"], check=True)
         break
