@@ -2,6 +2,7 @@ import os
 import sys
 import copy
 import time
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from generalDefs import loading
 import subprocess
@@ -16,6 +17,7 @@ with open("manageUsers/users.json", 'r') as file:
         users = json.load(file)
     except json.JSONDecodeError:
         users = []
+
 
 def savejson(users):
     with open("manageUsers/users.json", 'w') as userjson:
@@ -35,20 +37,21 @@ def findplayer2():
             return user["username"]
     return False
 
+
 def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode):
     if (mode == 'h'):
         wall_h[wall_row][wall_col], wall_h[wall_row][wall_col + 1] = "1", "1"
     else:
         wall_v[wall_row][wall_col], wall_v[wall_row + 1][wall_col] = "1", "1"
     visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v,"2")
+    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v, "2")
     result1 = False
     for i in range(0, 9):
         if (visited[0][i]):
             result1 = True
             break
     visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v,"1")
+    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v, "1")
     result2 = False
     for i in range(0, 9):
         if (visited[8][i]):
@@ -125,7 +128,7 @@ def printBoard(arrBoard, arrHFences, arrVFences, turn):
                 if (arrBoard[i // 2][j] != "0"):
                     # cell = "[bright_red]1 " if arrBoard[i // 2][j] == "1" else "[bright_blue]2 "
                     # ====================== COMMENT THIS IF THERE ARE RENDERING ISSUES ===============================
-                    cell = "[bright_red]⬛" if arrBoard[i // 2][j] == "1" else "[bright_blue]⬛"
+                    cell = "[red]⬛" if arrBoard[i // 2][j] == "1" else "[blue]⬛"
                     row_str += cell
                 else:
                     # row_str += "[white]0 "
