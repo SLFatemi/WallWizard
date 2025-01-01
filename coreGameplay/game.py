@@ -283,7 +283,6 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                 if (not wall_valid(rowp1, colmnp1, rowp2, colmnp2, arrHFences, arrVFences, wallrow, wallcolmn, 'h')):
                     rich.print("[bold][bright_red]\t    You can't place that wall")
                     continue
-                # TODO
                 # ======================= CHECK OTHER WALLS ===================
                 if (realarrVFences[wallrow][wallcolmn] == '1' and realarrVFences[wallrow + 1][wallcolmn] == '1'):
                     rich.print("[bold][bright_red]\t    You can't place that wall")
