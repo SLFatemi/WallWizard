@@ -1,5 +1,3 @@
-from logging import lastResort
-
 import generalDefs as methods
 import rich
 import subprocess
@@ -28,7 +26,7 @@ def printMenu(n, menu):
         if (user["isloggedin"] == True):
             usrname = user["username"]
             rich.print(
-                f"[dark_turquoise][bold] You are currently logged in as [italic][deep_pink4]{usrname} [/italic][/deep_pink4 ] \n")
+                f"[dark_turquoise][bold]You're currently logged in as [italic][deep_pink4]{usrname} [/italic][/deep_pink4 ] \n")
     if (n > len(menulist) - 1):
         n = 3
     if (n < 0 and n != -1):
@@ -80,7 +78,7 @@ n = 0
 printMenu(n, menulist)
 while (True):
     rich.print(
-        "\n[dark_cyan][bold]Use [magenta2]'w'[/magenta2] to go up , and [magenta2]'s'[/magenta2] to go down and Use [magenta2]'Space'[/magenta2] to select :[/bold]")
+        "\n[dark_cyan][bold]Use [magenta2]'w'[/magenta2] to go up, [magenta2]'s'[/magenta2] to go down and [magenta2]'Space'[/magenta2] to select[/bold]")
     menuinput = input("")
     if (menuinput == " "):
         selectedMenu(n)
