@@ -79,3 +79,4 @@ while (True):
 # time.sleep(2)
 loading()
 subprocess.run(["python", "menu.py"], check=True)
+exit()
