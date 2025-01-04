@@ -3,10 +3,23 @@ import rich
 import subprocess
 import json
 
+#
 # subprocess.run(["python", "coreGameplay/game.py"], check=True)
 # exit()
 methods.clear()
 lastplacecursor = 0
+try:
+    with open("manageUsers/users.json", 'r') as file:
+        try:
+            users = json.load(file)
+        except json.JSONDecodeError:
+            users = []
+except:
+    with open("manageUsers/users.json", 'a+') as file:
+        try:
+            users = json.load(file)
+        except json.JSONDecodeError:
+            users = []
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
