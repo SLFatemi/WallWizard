@@ -2,6 +2,7 @@ import os
 import sys
 import copy
 import time
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from generalDefs import loading
 import subprocess
@@ -16,6 +17,7 @@ with open("manageUsers/users.json", 'r') as file:
         users = json.load(file)
     except json.JSONDecodeError:
         users = []
+
 
 def savejson(users):
     with open("manageUsers/users.json", 'w') as userjson:
@@ -35,20 +37,21 @@ def findplayer2():
             return user["username"]
     return False
 
+
 def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode):
     if (mode == 'h'):
         wall_h[wall_row][wall_col], wall_h[wall_row][wall_col + 1] = "1", "1"
     else:
         wall_v[wall_row][wall_col], wall_v[wall_row + 1][wall_col] = "1", "1"
     visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v,"2")
+    dfs_recursive(arrBoard, row1, col1, visited, wall_h, wall_v, "2")
     result1 = False
     for i in range(0, 9):
         if (visited[0][i]):
             result1 = True
             break
     visited = [[False for i in range(9)] for j in range(9)]
-    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v,"1")
+    dfs_recursive(arrBoard, row2, col2, visited, wall_h, wall_v, "1")
     result2 = False
     for i in range(0, 9):
         if (visited[8][i]):
@@ -103,11 +106,17 @@ def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode)
 #                     cell = "  "
 #                 rich.print(f"[bright_white]{cell}", end="  ")
 #         print()
+wallsp1 = 10
+wallsp2 = 10
+
 
 def printBoard(arrBoard, arrHFences, arrVFences, turn):
+    # methods.printLine()
     board_str = []
     board_str.append(
         f"[bright_white][bold]Player1 : [bright_red]{findplayer1()}\t\t\t    [/bright_red] Player2 : [bright_blue]{findplayer2()}")
+    board_str.append(
+        f"[orange3][bold]Remaining walls : [bright_white]{wallsp1}[/bright_white]\t\tRemaining walls : [bright_white]{wallsp2}\n")
     board_str.append(
         "[bright_white][bold]  Enter [bright_green]'w'[/bright_green] to place a wall or Enter [bright_green]'m'[/bright_green] to move \n\t   [deep_pink4]Enter 'leave' to surrender[/deep_pink4]")
     board_str.append(
@@ -125,7 +134,7 @@ def printBoard(arrBoard, arrHFences, arrVFences, turn):
                 if (arrBoard[i // 2][j] != "0"):
                     # cell = "[bright_red]1 " if arrBoard[i // 2][j] == "1" else "[bright_blue]2 "
                     # ====================== COMMENT THIS IF THERE ARE RENDERING ISSUES ===============================
-                    cell = "[bright_red]⬛" if arrBoard[i // 2][j] == "1" else "[bright_blue]⬛"
+                    cell = "[red]⬛" if arrBoard[i // 2][j] == "1" else "[blue]⬛"
                     row_str += cell
                 else:
                     # row_str += "[white]0 "
@@ -322,6 +331,8 @@ def changeplayer1pos(row, colmn, inpt):
         if (arrBoard[row - 1][colmn] != '0'):
             # ========== NEGATIVE INDEXING (can't use try:except) ============
             if (row - 2 >= 0):
+                # TODO
+                # =================== WALL EXCEPTION HANDLING ==================
                 arrBoard[row - 2][colmn] = "1"
                 return (row - 2, colmn)
             else:
@@ -333,6 +344,8 @@ def changeplayer1pos(row, colmn, inpt):
     if (inpt == 's'):
         if (arrBoard[row + 1][colmn] != '0'):
             try:
+                # TODO
+                # =================== WALL EXCEPTION HANDLING ==================
                 arrBoard[row + 2][colmn] = "1"
                 return (row + 2, colmn)
             except:
@@ -344,6 +357,8 @@ def changeplayer1pos(row, colmn, inpt):
     if (inpt == 'd'):
         if (arrBoard[row][colmn + 1] != '0'):
             try:
+                # TODO
+                # =================== WALL EXCEPTION HANDLING ==================
                 arrBoard[row][colmn + 2] = "1"
                 return (row, colmn + 2)
             except:
@@ -356,6 +371,8 @@ def changeplayer1pos(row, colmn, inpt):
         if (arrBoard[row][colmn - 1] != '0'):
             # ========== NEGATIVE INDEXING (can't use try:except) ============
             if (colmn - 2 >= 0):
+                # TODO
+                # =================== WALL EXCEPTION HANDLING ==================
                 arrBoard[row][colmn - 2] = "1"
                 return (row, colmn - 2)
             else:
@@ -364,6 +381,27 @@ def changeplayer1pos(row, colmn, inpt):
                 return False
         arrBoard[row][colmn - 1] = "1"
         return (row, colmn - 1)
+
+
+def wincondition(rowp1, rowp2):
+    if (rowp2 == 8):
+        rich.print(
+            "\n[bold][bright_white][bright_blue]\t   Player2[/bright_blue] is the [gold1]W I N N E R ![/gold1]\n")
+        time.sleep(1)
+        rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+        print("\t\t", end="")
+        loading()
+        subprocess.run(["python", "menu.py"], check=True)
+        exit()
+    if (rowp1 == 0):
+        rich.print(
+            "\n[bold][bright_white][bright_red]\t   Player1[/bright_red] is the [gold1]W I N N E R ![/gold1]\n")
+        rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+        time.sleep(1)
+        print("\t\t", end="")
+        loading()
+        subprocess.run(["python", "menu.py"], check=True)
+        exit()
 
 
 def changeplayer2pos(row, colmn, inpt):
@@ -444,6 +482,8 @@ arrBoard[rowp1][colmnp1] = "1"
 turn = 'p1'
 printBoard(arrBoard, arrHFences, arrVFences, turn)
 while (True):
+    # ========================= WIN CONDITION ============================
+    wincondition(rowp1, rowp2)
     ipt = input()
     if (turn == "p1"):
         if (ipt == 'm'):
@@ -457,13 +497,18 @@ while (True):
             colmnp1 = output[1]
         elif (ipt == 'w'):
             methods.clear()
+            if (wallsp1 == 0):
+                rich.print("[bold][bright_red]\t\tYou're out of walls")
+                printBoard(arrBoard, arrHFences, arrVFences, turn)
+                continue
+            wallsp1 -= 1
             placewall("p1", 4, 4)
         elif (ipt == 'leave'):
             rich.print("[white][bright_red]\t     Player1[/bright_red] has surrendered\n")
             rich.print(
                 "[bold][bright_white][bright_blue]\t   Player2[/bright_blue] is the [gold1]W I N N E R ![/gold1]\n")
-            rich.print("[bold][bright_white]\t    Returning back to menu...\n")
             time.sleep(1)
+            rich.print("[bold][bright_white]\t    Returning back to menu...\n")
             print("\t\t", end="")
             loading()
             # TODO
@@ -486,6 +531,11 @@ while (True):
             colmnp2 = output[1]
         elif (ipt == 'w'):
             methods.clear()
+            if (wallsp2 == 0):
+                rich.print("[bold][bright_red]\t\tYou're out of walls")
+                printBoard(arrBoard, arrHFences, arrVFences, turn)
+                continue
+            wallsp2 -= 1
             placewall("p2", 4, 4)
         elif (ipt == 'leave'):
             rich.print("[white][bright_blue]\t     Player2[/bright_blue] has surrendered\n")
