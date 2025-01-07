@@ -2,10 +2,23 @@ import generalDefs as methods
 import rich
 import subprocess
 import json
+from pygame import mixer
 
 #
 # subprocess.run(["python", "coreGameplay/game.py"], check=True)
 # exit()
+
+
+# =================== PLAY MUSIC ===================
+mixer.init()
+
+
+def playnavsoundeffect():
+    mixer.music.load('8458-navigate-50.mp3')
+    mixer.music.set_volume(0.4)
+    mixer.music.play()
+
+
 methods.clear()
 lastplacecursor = 0
 try:
@@ -48,7 +61,7 @@ def printMenu(n, menu):
         if (menu.index(_) == n):
             global lastplacecursor
             lastplacecursor = n
-            rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
+            rich.print(f" ▶️ [bright_yellow]{_}[/bright_yellow]")
         else:
             rich.print("  ", f"[bright_white]{_}")
 
@@ -93,6 +106,7 @@ while (True):
     rich.print(
         "\n[dark_cyan][bold]Use [magenta2]'w'[/magenta2] to go up, [magenta2]'s'[/magenta2] to go down and [magenta2]'Space'[/magenta2] to select[/bold]")
     menuinput = input("")
+    playnavsoundeffect()
     if (menuinput == " "):
         selectedMenu(n)
     methods.clear()
