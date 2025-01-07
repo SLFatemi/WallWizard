@@ -14,9 +14,16 @@ mixer.init()
 
 
 def playnavsoundeffect():
-    mixer.music.load('8458-navigate-50.mp3')
+    mixer.music.load('nav.mp3')
     mixer.music.set_volume(0.4)
     mixer.music.play()
+
+    
+def playerrsoundeffect():
+    mixer.music.load('error.mp3')
+    mixer.music.set_volume(0.4)
+    mixer.music.play()
+
 
 
 methods.clear()
@@ -72,18 +79,23 @@ def checkmenuinput(ch, n):
     if (ch in expectedinputs):
         if (expectedinputs.index(ch) < 2):
             if (n != len(menulist) - 1):
+                playnavsoundeffect()
                 return n + 1
             print()
+            playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any lower[/bold][bright_red]")
             return 10
         else:
             if (n != 0):
+                playnavsoundeffect()
                 return n - 1
             print()
+            playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any higher[/bold][bright_red]")
             return -10
     else:
         rich.print("[bright_red][bold]Invalid input , Try again[/bold][bright_red]")
+        playerrsoundeffect()
         return lastplacecursor
 
 
@@ -106,7 +118,6 @@ while (True):
     rich.print(
         "\n[dark_cyan][bold]Use [magenta2]'w'[/magenta2] to go up, [magenta2]'s'[/magenta2] to go down and [magenta2]'Space'[/magenta2] to select[/bold]")
     menuinput = input("")
-    playnavsoundeffect()
     if (menuinput == " "):
         selectedMenu(n)
     methods.clear()
