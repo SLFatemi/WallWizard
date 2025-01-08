@@ -2,10 +2,30 @@ import generalDefs as methods
 import rich
 import subprocess
 import json
+from pygame import mixer
 
 #
 # subprocess.run(["python", "coreGameplay/game.py"], check=True)
 # exit()
+
+
+# =================== PLAY MUSIC ===================
+mixer.init()
+
+
+def playnavsoundeffect():
+    mixer.music.load('nav.mp3')
+    mixer.music.set_volume(0.4)
+    mixer.music.play()
+
+    
+def playerrsoundeffect():
+    mixer.music.load('error.mp3')
+    mixer.music.set_volume(0.4)
+    mixer.music.play()
+
+
+
 methods.clear()
 lastplacecursor = 0
 try:
@@ -48,7 +68,7 @@ def printMenu(n, menu):
         if (menu.index(_) == n):
             global lastplacecursor
             lastplacecursor = n
-            rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
+            rich.print(f" ▶️ [bright_yellow]{_}[/bright_yellow]")
         else:
             rich.print("  ", f"[bright_white]{_}")
 
@@ -59,18 +79,23 @@ def checkmenuinput(ch, n):
     if (ch in expectedinputs):
         if (expectedinputs.index(ch) < 2):
             if (n != len(menulist) - 1):
+                playnavsoundeffect()
                 return n + 1
             print()
+            playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any lower[/bold][bright_red]")
             return 10
         else:
             if (n != 0):
+                playnavsoundeffect()
                 return n - 1
             print()
+            playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any higher[/bold][bright_red]")
             return -10
     else:
         rich.print("[bright_red][bold]Invalid input , Try again[/bold][bright_red]")
+        playerrsoundeffect()
         return lastplacecursor
 
 
