@@ -4,14 +4,12 @@ import subprocess
 import json
 from pygame import mixer
 
+#
 # subprocess.run(["python", "coreGameplay/game.py"], check=True)
 # exit()
 
 
 # =================== PLAY MUSIC ===================
-methods.clear()
-rich.print("\n    [cyan1][italic][bold]Hang tight in there![/italic][/bold][white] Getting things ready...\n")
-methods.loading("cyan1", 4)
 mixer.init()
 
 
@@ -20,11 +18,12 @@ def playnavsoundeffect():
     mixer.music.set_volume(0.4)
     mixer.music.play()
 
-
+    
 def playerrsoundeffect():
     mixer.music.load('error.mp3')
     mixer.music.set_volume(0.4)
     mixer.music.play()
+
 
 
 methods.clear()
@@ -69,7 +68,7 @@ def printMenu(n, menu):
         if (menu.index(_) == n):
             global lastplacecursor
             lastplacecursor = n
-            rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
+            rich.print(f" ▶️ [bright_yellow]{_}[/bright_yellow]")
         else:
             rich.print("  ", f"[bright_white]{_}")
 
@@ -82,6 +81,7 @@ def checkmenuinput(ch, n):
             if (n != len(menulist) - 1):
                 playnavsoundeffect()
                 return n + 1
+            print()
             playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any lower[/bold][bright_red]")
             return 10
@@ -89,6 +89,7 @@ def checkmenuinput(ch, n):
             if (n != 0):
                 playnavsoundeffect()
                 return n - 1
+            print()
             playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any higher[/bold][bright_red]")
             return -10
