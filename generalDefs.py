@@ -10,20 +10,20 @@ def printLine():
     rich.print("[royal_blue1]==================== WallWizard ====================\n")
 
 
-def loading():
+def loading(color="cyan1", length=4):
     i = 0
-    while (i < 4):
+    while (i < length):
         print("\033[A                             \033[A")
-        rich.print("\n[cyan1][bold]\t\t\t|")
+        rich.print(f"\n[{color}][bold]\t\t\t|")
         time.sleep(0.15)
         print("\033[A                             \033[A")
-        rich.print("[cyan1][bold]\t\t\t/")
+        rich.print(f"[{color}][bold]\t\t\t/")
         time.sleep(0.15)
         print("\033[A                             \033[A")
-        rich.print("[cyan1][bold]\t\t\t-")
+        rich.print(f"[{color}][bold]\t\t\t-")
         time.sleep(0.15)
         print("\033[A                             \033[A")
-        rich.print("[cyan1][bold]\t\t\t\\")
+        rich.print(f"[{color}][bold]\t\t\t\\")
         time.sleep(0.15)
         print("\033[A                             \033[A")
         i += 1
