@@ -4,14 +4,12 @@ import subprocess
 import json
 from pygame import mixer
 
+#
 # subprocess.run(["python", "coreGameplay/game.py"], check=True)
 # exit()
 
 
 # =================== PLAY MUSIC ===================
-methods.clear()
-# rich.print("\n    [cyan1][italic][bold]Hang tight in there![/italic][/bold][white] Getting things ready...\n")
-# methods.loading("cyan1", 1)
 mixer.init()
 
 
@@ -20,16 +18,16 @@ def playnavsoundeffect():
     mixer.music.set_volume(0.4)
     mixer.music.play()
 
-
+    
 def playerrsoundeffect():
     mixer.music.load('error.mp3')
     mixer.music.set_volume(0.4)
     mixer.music.play()
 
 
+
 methods.clear()
 lastplacecursor = 0
-
 try:
     with open("manageUsers/users.json", 'r') as file:
         try:
@@ -42,30 +40,11 @@ except:
             users = json.load(file)
         except json.JSONDecodeError:
             users = []
-
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
     except json.JSONDecodeError:
         users = []
-try:
-    with open("manageUsers/gamelog.json", 'r') as file:
-        try:
-            logs = json.load(file)
-        except json.JSONDecodeError:
-            logs = []
-except:
-    with open("manageUsers/gamelog.json", 'a+') as file:
-        try:
-            logs = json.load(file)
-        except json.JSONDecodeError:
-            logs = []
-
-with open("manageUsers/gamelog.json", 'r') as file:
-    try:
-        logs = json.load(file)
-    except json.JSONDecodeError:
-        logs = []
 
 
 def savejson(users):
@@ -82,14 +61,14 @@ def printMenu(n, menu):
             rich.print(
                 f"[dark_turquoise][bold]You're currently logged in as [italic][deep_pink4]{usrname} [/italic][/deep_pink4 ] \n")
     if (n > len(menulist) - 1):
-        n = 4
+        n = 3
     if (n < 0 and n != -1):
         n = 0
     for _ in menu:
         if (menu.index(_) == n):
             global lastplacecursor
             lastplacecursor = n
-            rich.print(f" ▶ [bright_yellow]{_}[/bright_yellow]")
+            rich.print(f" ▶️ [bright_yellow]{_}[/bright_yellow]")
         else:
             rich.print("  ", f"[bright_white]{_}")
 
@@ -102,6 +81,7 @@ def checkmenuinput(ch, n):
             if (n != len(menulist) - 1):
                 playnavsoundeffect()
                 return n + 1
+            print()
             playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any lower[/bold][bright_red]")
             return 10
@@ -109,6 +89,7 @@ def checkmenuinput(ch, n):
             if (n != 0):
                 playnavsoundeffect()
                 return n - 1
+            print()
             playerrsoundeffect()
             rich.print("[bright_red][bold]You can't move any higher[/bold][bright_red]")
             return -10
@@ -123,15 +104,14 @@ def selectedMenu(n):
         0: "manageUsers/signin.py",
         1: "manageUsers/register.py",
         2: "start.py",
-        3: "showlog.py",
-        4: "exit.py"
+        3: "exit.py"
     }
     script_to_run = script_map.get(n)
     subprocess.run(["python", script_to_run], check=True)
     exit()
 
 
-menulist = ["Sign in", "Register", "Start", "Recent Games", "Exit"]
+menulist = ["Sign in", "Register", "Start", "Exit"]
 n = 0
 printMenu(n, menulist)
 while (True):
@@ -143,5 +123,5 @@ while (True):
     methods.clear()
     inp = checkmenuinput(menuinput, n)
     printMenu(inp, menulist)
-    if (inp <= 4 and inp >= 0):
+    if (inp <= 3 and inp >= 0):
         n = inp
