@@ -29,6 +29,7 @@ def playerrsoundeffect():
 
 methods.clear()
 lastplacecursor = 0
+
 try:
     with open("manageUsers/users.json", 'r') as file:
         try:
@@ -41,11 +42,30 @@ except:
             users = json.load(file)
         except json.JSONDecodeError:
             users = []
+
 with open("manageUsers/users.json", 'r') as file:
     try:
         users = json.load(file)
     except json.JSONDecodeError:
         users = []
+try:
+    with open("manageUsers/gamelog.json", 'r') as file:
+        try:
+            logs = json.load(file)
+        except json.JSONDecodeError:
+            logs = []
+except:
+    with open("manageUsers/gamelog.json", 'a+') as file:
+        try:
+            logs = json.load(file)
+        except json.JSONDecodeError:
+            logs = []
+
+with open("manageUsers/gamelog.json", 'r') as file:
+    try:
+        logs = json.load(file)
+    except json.JSONDecodeError:
+        logs = []
 
 
 def savejson(users):

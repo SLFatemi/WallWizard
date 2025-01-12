@@ -2,13 +2,13 @@ import os
 import sys
 import copy
 import time
+import uuid
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from generalDefs import loading
 import subprocess
 import generalDefs as methods
 import rich
-from rich.console import Console
 from dfs import dfs_recursive
 import json
 
@@ -471,6 +471,7 @@ def changeplayer2pos(row, colmn, inpt):
 
 def addloganddump(logs, winner):
     log = {
+        "id": str(uuid.uuid4())[::5],
         "player1": findplayer1(),
         "player2": findplayer2(),
         "winner": winner,
