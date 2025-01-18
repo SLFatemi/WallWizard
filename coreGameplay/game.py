@@ -402,6 +402,7 @@ def wincondition(rowp1, rowp2):
         loading()
         end = time.time()
         addloganddump(logs, findplayer2(), end)
+        changerank(findplayer2(), findplayer1())
         subprocess.run(["python", "menu.py"], check=True)
         exit()
     if (rowp1 == 0):
@@ -413,6 +414,7 @@ def wincondition(rowp1, rowp2):
         loading()
         end = time.time()
         addloganddump(logs, findplayer1(), end)
+        changerank(findplayer1(), findplayer2())
         subprocess.run(["python", "menu.py"], check=True)
         exit()
 
@@ -484,6 +486,46 @@ def addloganddump(logs, winner, end):
     savejsonlog(logs)
 
 
+def changerank(winner, loser):
+    for user in users:
+        if (user["username"] == winner):
+            rank = int(user["rank"])
+            user["rank"] = str(rank + 10)
+        elif (user["username"] == loser):
+            rank = int(user["rank"])
+            user["rank"] = str(rank - 10)
+    savejson(users)
+
+
+def surrender(player):
+    if (player == "1"):
+        rich.print("[white][bright_red]\t     Player1[/bright_red] has surrendered\n")
+        rich.print(
+            "[bold][bright_white][bright_blue]\t   Player2[/bright_blue] is the [gold1]W I N N E R ![/gold1]\n")
+        time.sleep(1)
+        rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+        print("\t\t", end="")
+        loading()
+        end = time.time()
+        addloganddump(logs, findplayer2(), end)
+        changerank(findplayer2(), findplayer1())
+        subprocess.run(["python", "menu.py"], check=True)
+        exit()
+    else:
+        rich.print("[white][bright_blue]\t     Player2[/bright_blue] has surrendered\n")
+        rich.print(
+            "[bold][bright_white][bright_red]\t   Player1[/bright_red] is the [gold1]W I N N E R ![/gold1]\n")
+        rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+        time.sleep(1)
+        print("\t\t", end="")
+        loading()
+        end = time.time()
+        addloganddump(logs, findplayer1(), end)
+        changerank(findplayer1(), findplayer2())
+        subprocess.run(["python", "menu.py"], check=True)
+        exit()
+
+
 wallsp1 = 10
 wallsp2 = 10
 methods.clear()
@@ -524,18 +566,20 @@ while (True):
             wallsp1 -= 1
             placewall("p1", 4, 4)
         elif (ipt == 'leave'):
-            rich.print("[white][bright_red]\t     Player1[/bright_red] has surrendered\n")
-            rich.print(
-                "[bold][bright_white][bright_blue]\t   Player2[/bright_blue] is the [gold1]W I N N E R ![/gold1]\n")
-            time.sleep(1)
-            rich.print("[bold][bright_white]\t    Returning back to menu...\n")
-            print("\t\t", end="")
-            loading()
-            # TODO
-            end = time.time()
-            addloganddump(logs, findplayer2(), end)
-            subprocess.run(["python", "menu.py"], check=True)
-            exit()
+            surrender("1")
+            # rich.print("[white][bright_red]\t     Player1[/bright_red] has surrendered\n")
+            # rich.print(
+            #     "[bold][bright_white][bright_blue]\t   Player2[/bright_blue] is the [gold1]W I N N E R ![/gold1]\n")
+            # time.sleep(1)
+            # rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+            # print("\t\t", end="")
+            # loading()
+            # # TODO
+            # end = time.time()
+            # addloganddump(logs, findplayer2(), end)
+            # changerank(findplayer2(), findplayer1())
+            # subprocess.run(["python", "menu.py"], check=True)
+            # exit()
         else:
             methods.clear()
             rich.print("[bold][bright_red]\t\t  Invalid input")
@@ -560,18 +604,20 @@ while (True):
             wallsp2 -= 1
             placewall("p2", 4, 4)
         elif (ipt == 'leave'):
-            rich.print("[white][bright_blue]\t     Player2[/bright_blue] has surrendered\n")
-            rich.print(
-                "[bold][bright_white][bright_red]\t   Player1[/bright_red] is the [gold1]W I N N E R ![/gold1]\n")
-            rich.print("[bold][bright_white]\t    Returning back to menu...\n")
-            time.sleep(1)
-            print("\t\t", end="")
-            loading()
-            # TODO
-            end = time.time()
-            addloganddump(logs, findplayer1(), end)
-            subprocess.run(["python", "menu.py"], check=True)
-            exit()
+            surrender("2")
+            # rich.print("[white][bright_blue]\t     Player2[/bright_blue] has surrendered\n")
+            # rich.print(
+            #     "[bold][bright_white][bright_red]\t   Player1[/bright_red] is the [gold1]W I N N E R ![/gold1]\n")
+            # rich.print("[bold][bright_white]\t    Returning back to menu...\n")
+            # time.sleep(1)
+            # print("\t\t", end="")
+            # loading()
+            # # TODO
+            # end = time.time()
+            # addloganddump(logs, findplayer1(), end)
+            # changerank(findplayer1(), findplayer2())
+            # subprocess.run(["python", "menu.py"], check=True)
+            # exit()
         else:
             methods.clear()
             rich.print("[bold][bright_red]\t\t  Invalid input")
