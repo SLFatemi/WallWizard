@@ -4,6 +4,7 @@ import subprocess
 import json
 from pygame import mixer
 import msvcrt
+
 # subprocess.run(["python", "coreGameplay/game.py"], check=True)
 # exit()
 
@@ -82,7 +83,7 @@ def printMenu(n, menu):
             rich.print(
                 f"[dark_turquoise][bold]You're currently logged in as [italic][deep_pink4]{usrname} [/italic][/deep_pink4 ] \n")
     if (n > len(menulist) - 1):
-        n = 4
+        n = 5
     if (n < 0 and n != -1):
         n = 0
     for _ in menu:
@@ -124,14 +125,15 @@ def selectedMenu(n):
         1: "manageUsers/register.py",
         2: "start.py",
         3: "showlog.py",
-        4: "exit.py"
+        4: "leaderboard.py",
+        5: "exit.py"
     }
     script_to_run = script_map.get(n)
     subprocess.run(["python", script_to_run], check=True)
     exit()
 
 
-menulist = ["Sign in", "Register", "Start", "Recent Games", "Exit"]
+menulist = ["Sign in", "Register", "Start", "Recent Games", "LeaderBoard", "Exit"]
 n = 0
 printMenu(n, menulist)
 while (True):
@@ -144,5 +146,5 @@ while (True):
     methods.clear()
     inp = checkmenuinput(menuinput, n)
     printMenu(inp, menulist)
-    if (inp <= 4 and inp >= 0):
+    if (inp <= 5 and inp >= 0):
         n = inp
