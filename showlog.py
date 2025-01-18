@@ -25,7 +25,7 @@ for game in logs:
     hours = minutes // 60
     seconds -= (hours * 3600 + minutes * 60)
 
-    rich.print(f"Game took {hours} hour(s) and {minutes} and minute(s) and {seconds} second(s) ")
+    rich.print(f"Game took {hours} hour(s) and {minutes} and minute(s) and {seconds} second(s)\n")
 rich.print(f"[orange1][bold]====================================================")
 rich.print("\n        [bright_white][bold]Enter anything to get back to [deep_pink4]menu[/deep_pink4]\n")
 s = input()
