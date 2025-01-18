@@ -3,7 +3,7 @@ import sys
 import copy
 import time
 import uuid
-
+import msvcrt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from generalDefs import loading
 import subprocess
@@ -215,7 +215,8 @@ def placewall(turn, wallrow=7, wallcolmn=0):
             arrHFences[wallrow][wallcolmn] = '2'
             arrHFences[wallrow][wallcolmn + 1] = '2'
         printBoard(arrBoard, arrHFences, arrVFences, turn)
-        s = input()
+        input = str(msvcrt.getch())
+        s = input[2]
         methods.clear()
         if (vertical):
             arrVFences[wallrow][wallcolmn] = '2'
@@ -546,10 +547,12 @@ printBoard(arrBoard, arrHFences, arrVFences, turn)
 while (True):
     # ========================= WIN CONDITION ============================
     wincondition(rowp1, rowp2)
-    ipt = input()
+    input = str(msvcrt.getch())
+    ipt = input[2]
     if (turn == "p1"):
         if (ipt == 'm'):
-            userinput = input()
+            input = str(msvcrt.getch())
+            userinput = input[2]
             methods.clear()
             output = changeplayer1pos(rowp1, colmnp1, userinput)
             if (output == False):
@@ -587,7 +590,8 @@ while (True):
             continue
     if (turn == "p2"):
         if (ipt == 'm'):
-            userinput = input()
+            input = str(msvcrt.getch())
+            userinput = input[2]
             methods.clear()
             output = changeplayer2pos(rowp2, colmnp2, userinput)
             if (output == False):
