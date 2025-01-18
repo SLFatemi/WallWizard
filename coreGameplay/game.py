@@ -4,6 +4,7 @@ import copy
 import time
 import uuid
 import msvcrt
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from generalDefs import loading
 import subprocess
@@ -550,9 +551,8 @@ while (True):
     input = str(msvcrt.getch())
     ipt = input[2]
     if (turn == "p1"):
-        if (ipt == 'm'):
-            input = str(msvcrt.getch())
-            userinput = input[2]
+        if (ipt == 'd' or ipt == 'a' or ipt == 's' or ipt == 'w'):
+            userinput = ipt
             methods.clear()
             output = changeplayer1pos(rowp1, colmnp1, userinput)
             if (output == False):
@@ -560,7 +560,7 @@ while (True):
                 continue
             rowp1 = output[0]
             colmnp1 = output[1]
-        elif (ipt == 'w'):
+        elif (ipt == 'q'):
             methods.clear()
             if (wallsp1 == 0):
                 rich.print("[bold][bright_red]\t\tYou're out of walls")
@@ -568,30 +568,16 @@ while (True):
                 continue
             wallsp1 -= 1
             placewall("p1", 4, 4)
-        elif (ipt == 'leave'):
+        elif (ipt == 'l'):
             surrender("1")
-            # rich.print("[white][bright_red]\t     Player1[/bright_red] has surrendered\n")
-            # rich.print(
-            #     "[bold][bright_white][bright_blue]\t   Player2[/bright_blue] is the [gold1]W I N N E R ![/gold1]\n")
-            # time.sleep(1)
-            # rich.print("[bold][bright_white]\t    Returning back to menu...\n")
-            # print("\t\t", end="")
-            # loading()
-            # # TODO
-            # end = time.time()
-            # addloganddump(logs, findplayer2(), end)
-            # changerank(findplayer2(), findplayer1())
-            # subprocess.run(["python", "menu.py"], check=True)
-            # exit()
         else:
             methods.clear()
             rich.print("[bold][bright_red]\t\t  Invalid input")
             printBoard(arrBoard, arrHFences, arrVFences, turn)
             continue
     if (turn == "p2"):
-        if (ipt == 'm'):
-            input = str(msvcrt.getch())
-            userinput = input[2]
+        if (ipt == 'd' or ipt == 'a' or ipt == 's' or ipt == 'w'):
+            userinput = ipt
             methods.clear()
             output = changeplayer2pos(rowp2, colmnp2, userinput)
             if (output == False):
@@ -599,7 +585,7 @@ while (True):
                 continue
             rowp2 = output[0]
             colmnp2 = output[1]
-        elif (ipt == 'w'):
+        elif (ipt == 'q'):
             methods.clear()
             if (wallsp2 == 0):
                 rich.print("[bold][bright_red]\t\tYou're out of walls")
@@ -607,7 +593,7 @@ while (True):
                 continue
             wallsp2 -= 1
             placewall("p2", 4, 4)
-        elif (ipt == 'leave'):
+        elif (ipt == 'l'):
             surrender("2")
             # rich.print("[white][bright_blue]\t     Player2[/bright_blue] has surrendered\n")
             # rich.print(
