@@ -2,13 +2,13 @@ import os
 import sys
 import copy
 import time
+import uuid
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from generalDefs import loading
 import subprocess
 import generalDefs as methods
 import rich
-from rich.console import Console
 from dfs import dfs_recursive
 import json
 
@@ -17,11 +17,21 @@ with open("manageUsers/users.json", 'r') as file:
         users = json.load(file)
     except json.JSONDecodeError:
         users = []
+with open("manageUsers/gamelog.json", 'r') as file:
+    try:
+        logs = json.load(file)
+    except json.JSONDecodeError:
+        logs = []
 
 
 def savejson(users):
     with open("manageUsers/users.json", 'w') as userjson:
         json.dump(users, userjson, indent=4)
+
+
+def savejsonlog(logs):
+    with open("manageUsers/gamelog.json", 'w') as gamelog:
+        json.dump(logs, gamelog, indent=4)
 
 
 def findplayer1():
@@ -106,8 +116,6 @@ def wall_valid(row1, col1, row2, col2, wall_h, wall_v, wall_row, wall_col, mode)
 #                     cell = "  "
 #                 rich.print(f"[bright_white]{cell}", end="  ")
 #         print()
-wallsp1 = 10
-wallsp2 = 10
 
 
 def printBoard(arrBoard, arrHFences, arrVFences, turn):
@@ -223,6 +231,7 @@ def placewall(turn, wallrow=7, wallcolmn=0):
                     rich.print("[bold][bright_red]\t    You can't make that move")
                     continue
                 arrVFences[wallrow][wallcolmn] = realarrVFences[wallrow][wallcolmn]
+
                 wallrow += 1
             if (s == 'd'):
                 if (wallcolmn >= 7):
@@ -391,6 +400,8 @@ def wincondition(rowp1, rowp2):
         rich.print("[bold][bright_white]\t    Returning back to menu...\n")
         print("\t\t", end="")
         loading()
+        end = time.time()
+        addloganddump(logs, findplayer2(), end)
         subprocess.run(["python", "menu.py"], check=True)
         exit()
     if (rowp1 == 0):
@@ -400,6 +411,8 @@ def wincondition(rowp1, rowp2):
         time.sleep(1)
         print("\t\t", end="")
         loading()
+        end = time.time()
+        addloganddump(logs, findplayer1(), end)
         subprocess.run(["python", "menu.py"], check=True)
         exit()
 
@@ -458,21 +471,28 @@ def changeplayer2pos(row, colmn, inpt):
         return (row, colmn - 1)
 
 
+def addloganddump(logs, winner, end):
+    log = {
+        "id": str(uuid.uuid4())[::5],
+        "player1": findplayer1(),
+        "player2": findplayer2(),
+        "winner": winner,
+        "date": date,
+        "length": int(end - start)
+    }
+    logs.append(log)
+    savejsonlog(logs)
+
+
+wallsp1 = 10
+wallsp2 = 10
 methods.clear()
-console = Console()
+date = time.ctime(time.time())
+start = time.time()
 # ======================= initialize board ===========================
 arrBoard = [["0" for i in range(9)] for j in range(9)]
 arrVFences = [["0" for i in range(8)] for j in range(9)]
 arrHFences = [["0" for i in range(9)] for j in range(8)]
-# ======================= TEST ==========================
-# arrHFences[7][4] = "1"
-# arrVFences[6][4] = "1"
-# arrVFences[5][4] = "1"
-# arrHFences[5][0] = "1"
-# arrHFences[5][1] = "1"
-# arrHFences[5][2] = "1"
-# arrHFences[5][3] = "1"
-# ======================= TEST ==========================
 rowp1 = 8
 rowp2 = 0
 colmnp1 = 4
@@ -512,6 +532,8 @@ while (True):
             print("\t\t", end="")
             loading()
             # TODO
+            end = time.time()
+            addloganddump(logs, findplayer2(), end)
             subprocess.run(["python", "menu.py"], check=True)
             exit()
         else:
@@ -546,6 +568,8 @@ while (True):
             print("\t\t", end="")
             loading()
             # TODO
+            end = time.time()
+            addloganddump(logs, findplayer1(), end)
             subprocess.run(["python", "menu.py"], check=True)
             exit()
         else:
