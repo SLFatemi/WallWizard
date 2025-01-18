@@ -31,7 +31,7 @@ for user in userrankdic.items():
         rich.print(
             f"     {i + 1} : [white]{user[0]}[/white]\t\t\t[white]Rank[/white]: [bright_blue]{user[1]}\n")
     i += 1
-rich.print(f"[orange1][bold]==============================================")
+rich.print(f"[orange1][bold]====================================================")
 rich.print("\n        [bright_white][bold]Enter anything to get back to [deep_pink4]menu[/deep_pink4]\n")
 s = input()
 loading()
