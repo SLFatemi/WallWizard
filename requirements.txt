@@ -1,5 +1,7 @@
 bcrypt==4.2.1
 markdown-it-py==3.0.0
 mdurl==0.1.2
+pygame==2.6.1
 Pygments==2.18.0
 rich==13.9.4
+uuid==1.30
