@@ -127,7 +127,7 @@ def printBoard(arrBoard, arrHFences, arrVFences, turn):
     board_str.append(
         f"[orange3][bold]Remaining walls : [bright_white]{wallsp1}[/bright_white]\t\tRemaining walls : [bright_white]{wallsp2}\n")
     board_str.append(
-        "[bright_white][bold]  Enter [bright_green]'w'[/bright_green] to place a wall or Enter [bright_green]'m'[/bright_green] to move \n\t   [deep_pink4]Enter 'leave' to surrender[/deep_pink4]")
+        "[bright_white][bold]Enter [bright_green]'q'[/bright_green] to place a wall or use [bright_green]'w,a,s,d'[/bright_green] to move \n\t   [deep_pink4]   Enter 'l' to surrender[/deep_pink4]")
     board_str.append(
         "[white]     Use [bright_green]'w,a,s,d'[/bright_green] to move across the board \n\t    Use [bright_green]'r'[/bright_green] to rotate the wall\n")
     if (turn == "p1"):

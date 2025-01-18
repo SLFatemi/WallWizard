@@ -141,7 +141,7 @@ while (True):
         "\n[dark_cyan][bold]Use [magenta2]'w'[/magenta2] to go up, [magenta2]'s'[/magenta2] to go down and [magenta2]'Space'[/magenta2] to select[/bold]")
     input = str(msvcrt.getch())
     menuinput = input[2]
-    if (menuinput == " "):
+    if (menuinput == " " or menuinput == ""):
         selectedMenu(n)
     methods.clear()
     inp = checkmenuinput(menuinput, n)
